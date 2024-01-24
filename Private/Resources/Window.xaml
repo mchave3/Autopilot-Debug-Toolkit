@@ -1,0 +1,12 @@
+<Window 
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Name="Window" 
+    Title="Autopilot Debug Toolkit" 
+    WindowStartupLocation="CenterScreen"
+    Width="1280"
+    Height="720">
+    <Grid>
+        <Button x:Name="Button_Test" Content="Click me" Width="100" Height="30" />
+    </Grid>
+</Window>
