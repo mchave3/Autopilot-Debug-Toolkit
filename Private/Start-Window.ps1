@@ -2,9 +2,21 @@ function Start-Window {
     Add-Type -AssemblyName PresentationFramework
 
     # Load XAML
-    [xml]$xaml = Get-Content -Path ".\Private\Resources\Window.xaml" -Raw
+    [xml]$xaml = Get-Content -Path ".\Private\Assets\Window.xaml" -Raw
     $xamlReader = New-Object System.Xml.XmlNodeReader $xaml
     $window = [Windows.Markup.XamlReader]::Load($xamlReader)
+
+    # Get a file from folder path and convert to base64
+
+    $iconPath = Get-ChildItem -Path ".\Private\Assets\Icons" -Filter "*.ico" -ErrorAction Stop -
+    if ($iconPath.Count -gt 1) {
+        $iconPath = $iconPath | Out-GridView -Title "Select an icon" -PassThru
+    }
+
+
+
+    $iconBase64 = [System.Convert]::ToBase64String($icon)
+
 
     # Create variables for each named element
     $xaml.SelectNodes("//*[@*[contains(translate(name(.),'n','N'),'Name')]]")  | ForEach-Object {
@@ -29,4 +41,4 @@ function Start-Window {
     $Window.ShowDialog() | Out-Null
 }
 
-Export-ModuleMember -Function Start-Window
+Start-Window
